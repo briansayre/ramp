@@ -88,22 +88,36 @@
 
     <script>
 
+
         $(document).ready(function () {
 
             $("#ramp_height_feet, #ramp_height_inches, #ramp_length_feet, #ramp_length_inches, #ratio").on("input", calc);
-            $("#calc").on("click", calc)
+            $("#calc").on("click", calc);
 
             function calc() {
+
                 var heightFeet = parseFloat($("#ramp_height_feet").val());
+                if (isNaN(heightFeet)) heightFeet = 0;
+
                 var heightInches = parseFloat($("#ramp_height_inches").val());
+                if (isNaN(heightInches)) heightInches = 0;
+
                 var lengthFeet = parseFloat($("#ramp_length_feet").val());
+                if (isNaN(lengthFeet)) lengthFeet = 0;
+
                 var lengthInches = parseFloat($("#ramp_length_inches").val());
+                if (isNaN(lengthInches)) lengthInches = 0;
+
                 var height = (heightFeet * 12) + heightInches;
                 var length = (lengthFeet * 12) + lengthInches;
-                //var ratio = Math.round((height / length * 1000)) / 1000;
+
+                //var ratio = Math.round((height / length * 1000)) / 1000;\
                 var ratio = height / length;
                 $('#ratio').html(ratio);
+
             }
+
+            calc();
 
         });
 
