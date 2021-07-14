@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
     <div class="row">
         <nav>
             <div class="nav-wrapper teal center">
@@ -32,35 +33,33 @@
 
     <div class="container">
 
+        <div class="row center">
+            Select the value you want to calculate
+        </div>
+        
         <div class="row">
 
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title">Ramp Height</span>
+                    <span class="card-title">
+                        <span class="radio">
+                            <label>
+                                <input class="radio" id="heightRadio" name="group" type="radio" />
+                                <span></span>
+                            </label>
+                        </span>
+                        Ramp Height
+                    </span>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="ramp_height_feet" type="number">
+                            <input id="ramp_height_feet" placeholder="" type="number">
                             <label for="ramp_height_feet">Feet</label>
+                            <label for="disabled"></label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="ramp_height_inches" type="number">
+                            <input id="ramp_height_inches" placeholder="" type="number">
                             <label for="ramp_height_inches">Inches</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Ramp Length</span>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="ramp_length_feet" type="number">
-                            <label for="ramp_length_feet">Feet</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="ramp_length_inches" type="number">
-                            <label for="ramp_length_inches">Inches</label>
+                            <label for="disabled"></label>
                         </div>
                     </div>
                 </div>
@@ -69,14 +68,47 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">
-                        Ratio: <span id="ratio">0</span>
+                        <span class="radio">
+                            <label>
+                                <input class="radio" id="lengthRadio" name="group" type="radio" />
+                                <span></span>
+                            </label>
+                        </span>
+                        Ramp Length
                     </span>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="ramp_length_feet" placeholder="" type="number">
+                            <label for="ramp_length_feet">Feet</label>
+                            <label for="disabled"></label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="ramp_length_inches" placeholder="" type="number">
+                            <label for="ramp_length_inches">Inches</label>
+                            <label for="disabled"></label>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-action">
-                    <a class="waves-effect waves-light btn" id="calc">
-                        <i class="material-icons left">calculate</i>
-                        Calculate
-                    </a>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <span class="radio">
+                            <label>
+                                <input checked class="radio" id="ratioRadio" name="group" type="radio" checked />
+                                <span></span>
+                            </label>
+                        </span>
+                        Ratio:
+                    </span>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input disabled placeholder="" id="ratio" type="number">
+                            <label for="disabled"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -88,14 +120,26 @@
 
     <script>
 
-
+        
         $(document).ready(function () {
 
+            $("#ratio").attr("disabled",'');
+            $("#ratio").attr("checked",'');
+
+            $("#ramp_length_feet").removeAttr("disabled");
+            $("#ramp_length_inches").removeAttr("disabled");
+
+            $("#ramp_height_feet").removeAttr("disabled");
+            $("#ramp_height_inches").removeAttr("disabled");
+            calc();
+
+            var selected = 3;
+
             $("#ramp_height_feet, #ramp_height_inches, #ramp_length_feet, #ramp_length_inches, #ratio").on("input", calc);
-            $("#calc").on("click", calc);
+            $('.radio').click(toggle);
 
             function calc() {
-
+                
                 var heightFeet = parseFloat($("#ramp_height_feet").val());
                 if (isNaN(heightFeet)) heightFeet = 0;
 
@@ -108,13 +152,71 @@
                 var lengthInches = parseFloat($("#ramp_length_inches").val());
                 if (isNaN(lengthInches)) lengthInches = 0;
 
-                var height = (heightFeet * 12) + heightInches;
-                var length = (lengthFeet * 12) + lengthInches;
+                var ratio = parseFloat($("#ratio").val());
+                if (isNaN(ratio)) ratio = 0;
+                
+                var heightTotal = parseInt((heightFeet) * 12) + heightInches;
+                var lengthTotal = parseInt((lengthFeet) * 12) + lengthInches;
+                var ratioResult = heightTotal / lengthTotal;
 
-                //var ratio = Math.round((height / length * 1000)) / 1000;\
-                var ratio = height / length;
-                $('#ratio').html(ratio);
+                if (selected == 1) {
+                    heightTotal = lengthTotal * ratio;
+                    heightFeet = Math.floor(heightTotal/12);
+                    heightInches = heightTotal%12;
+                    $('#ramp_height_feet').val(heightFeet);
+                    $('#ramp_height_inches').val(heightInches);
+                } else if (selected == 2) {
+                    lengthTotal = heightTotal / ratio;
+                    lengthFeet = Math.floor(lengthTotal/12);
+                    lengthInches = lengthTotal%12;
+                    $('#ramp_length_feet').val(lengthFeet);
+                    $('#ramp_length_inches').val(lengthInches);
+                } else if (selected == 3) {
+                    $('#ratio').val(ratioResult);
+                }
 
+            }
+
+            function toggle() {
+                if($("#heightRadio")[0].checked){
+
+                    $("#ramp_height_feet").attr("disabled",'');
+                    $("#ramp_height_inches").attr("disabled",'');
+                    
+                    $("#ramp_length_feet").removeAttr("disabled");
+                    $("#ramp_length_inches").removeAttr("disabled");
+                    
+                    $("#ratio").removeAttr("disabled");
+
+                    selected = 1;
+                    calc();
+
+                } else if($("#lengthRadio")[0].checked){
+                    
+                    $("#ramp_length_feet").attr("disabled",'');
+                    $("#ramp_length_inches").attr("disabled",'');
+                    
+                    $("#ramp_height_feet").removeAttr("disabled");
+                    $("#ramp_height_inches").removeAttr("disabled");
+                    
+                    $("#ratio").removeAttr("disabled");
+                    
+                    selected = 2;
+                    calc();
+
+                } else if($("#ratioRadio")[0].checked){
+
+                    $("#ratio").attr("disabled",'');
+
+                    $("#ramp_length_feet").removeAttr("disabled");
+                    $("#ramp_length_inches").removeAttr("disabled");
+
+                    $("#ramp_height_feet").removeAttr("disabled");
+                    $("#ramp_height_inches").removeAttr("disabled");
+
+                    selected = 3;
+                    calc();
+                } 
             }
 
             calc();
