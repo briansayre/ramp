@@ -4,15 +4,11 @@ body {
 
 .header {
     font-size: 1.75rem;
-    font-weight: bold;
 }
 
 .radio {
     display: inline-block;
     position: relative;
     top: 5px;
-}
-
-.card {
-    color: black;
+    margin-right: -15px;
 }
