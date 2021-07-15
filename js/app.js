@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+
     var selected = 3;
     var metric = $("#units").prop("checked");
 
@@ -43,7 +43,7 @@ $(document).ready(function () {
             $("#ramp_height_feet").val(heightTotal);
         } else if (selected == 2) {
             lengthTotal = heightFeet / ratio;
-            $("#ramp_length_feet").val(lengthFeet);
+            $("#ramp_length_feet").val(lengthTotal);
         } else if (selected == 3) {
             $("#ratio").val(heightFeet / lengthFeet);
         }
