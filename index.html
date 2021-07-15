@@ -16,6 +16,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/app.js"></script>
 
     <title>Jump Ramp Calculator</title>
 </head>
@@ -32,7 +33,9 @@
 
     <div class="container">
 
-        <div class="row center">Select the value that you want to calculate.</div>
+        <div class="row center">
+            Select the value that you want to calculate.
+        </div>
 
         <div class="row">
             <div class="card">
@@ -47,14 +50,14 @@
                         Ramp Height
                     </span>
                     <div class="row inputs">
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 feet">
                             <input id="ramp_height_feet" placeholder="" type="number" />
-                            <label for="ramp_height_feet">Feet</label>
+                            <label id="ramp_height_feet_label" for="ramp_height_feet">Feet</label>
                             <label for="disabled"></label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 inches">
                             <input id="ramp_height_inches" placeholder="" type="number" />
-                            <label for="ramp_height_inches">Inches</label>
+                            <label id="ramp_height_incheslabel" for="ramp_height_inches">Inches</label>
                             <label for="disabled"></label>
                         </div>
                     </div>
@@ -73,14 +76,14 @@
                         Ramp Length
                     </span>
                     <div class="row inputs">
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 feet">
                             <input id="ramp_length_feet" placeholder="" type="number" />
-                            <label for="ramp_length_feet">Feet</label>
+                            <label id="ramp_length_feet_label" for="ramp_length_feet">Feet</label>
                             <label for="disabled"></label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 inches">
                             <input id="ramp_length_inches" placeholder="" type="number" />
-                            <label for="ramp_length_inches">Inches</label>
+                            <label id="ramp_length_inches_label" for="ramp_length_inches">Inches</label>
                             <label for="disabled"></label>
                         </div>
                     </div>
@@ -108,90 +111,20 @@
                 </div>
             </div>
         </div>
+        <div class="row center">
+            <div class="switch">
+                <label>
+                    Imperial
+                    <input id="units" type="checkbox">
+                    <span class="lever"></span>
+                    Metric
+                </label>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            var selected = 3;
-
-            $(
-                "#ramp_height_feet, #ramp_height_inches, #ramp_length_feet, #ramp_length_inches, #ratio"
-            ).on("input", calc);
-            $(".radio").click(toggle);
-
-            enableAll();
-            $("#ratio").attr("disabled", "");
-            $("#ratio").attr("checked", "");
-
-            function calc() {
-                var heightFeet = parseFloat($("#ramp_height_feet").val());
-                if (isNaN(heightFeet)) heightFeet = 0;
-
-                var heightInches = parseFloat($("#ramp_height_inches").val());
-                if (isNaN(heightInches)) heightInches = 0;
-
-                var lengthFeet = parseFloat($("#ramp_length_feet").val());
-                if (isNaN(lengthFeet)) lengthFeet = 0;
-
-                var lengthInches = parseFloat($("#ramp_length_inches").val());
-                if (isNaN(lengthInches)) lengthInches = 0;
-
-                var ratio = parseFloat($("#ratio").val());
-                if (isNaN(ratio)) ratio = 0;
-
-                var heightTotal = parseInt(heightFeet * 12) + heightInches;
-                var lengthTotal = parseInt(lengthFeet * 12) + lengthInches;
-
-                if (selected == 1) {
-                    heightTotal = lengthTotal * ratio;
-                    heightFeet = Math.floor(heightTotal / 12);
-                    heightInches = heightTotal % 12;
-                    $("#ramp_height_feet").val(heightFeet);
-                    $("#ramp_height_inches").val(heightInches);
-                } else if (selected == 2) {
-                    lengthTotal = heightTotal / ratio;
-                    lengthFeet = Math.floor(lengthTotal / 12);
-                    lengthInches = lengthTotal % 12;
-                    $("#ramp_length_feet").val(lengthFeet);
-                    $("#ramp_length_inches").val(lengthInches);
-                } else if (selected == 3) {
-                    $("#ratio").val(heightTotal / lengthTotal);
-                }
-            }
-
-            function toggle() {
-                if ($("#heightRadio")[0].checked) {
-                    enableAll();
-                    $("#ramp_height_feet").attr("disabled", "");
-                    $("#ramp_height_inches").attr("disabled", "");
-                    selected = 1;
-                } else if ($("#lengthRadio")[0].checked) {
-                    enableAll();
-                    $("#ramp_length_feet").attr("disabled", "");
-                    $("#ramp_length_inches").attr("disabled", "");
-                    selected = 2;
-                } else if ($("#ratioRadio")[0].checked) {
-                    enableAll();
-                    $("#ratio").attr("disabled", "");
-                    selected = 3;
-                }
-                calc();
-            }
-
-            function enableAll() {
-                $("#ramp_length_feet").removeAttr("disabled");
-                $("#ramp_length_inches").removeAttr("disabled");
-                $("#ramp_height_feet").removeAttr("disabled");
-                $("#ramp_height_inches").removeAttr("disabled");
-                $("#ratio").removeAttr("disabled");
-            }
-
-            calc();
-        });
-    </script>
+    
 </body>
 
 </html>
