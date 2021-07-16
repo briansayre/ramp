@@ -1,6 +1,19 @@
 <html>
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1Q4HZ9S35"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N1Q4HZ9S35');
+    </script>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <meta content="utf-8" http-equiv="encoding" />
 
@@ -16,6 +29,7 @@
     <script src="./js/app.js"></script>
 
     <title>Jump Ramp Calculator</title>
+
 </head>
 
 <body>
@@ -30,84 +44,94 @@
 
     <div class="container">
 
-        <div class="row center">
+        <div class="row center grey-text text-darken-1">
             Select the value that you want to calculate.
         </div>
-
+        
         <div class="row">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">
-                        <span class="radio text-deep-orange-text">
-                            <label>
-                                <input class="radio with-gap deep-orange-text" id="heightRadio" name="group" type="radio" />
-                                <span></span>
-                            </label>
+
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            <span class="radio text-deep-orange-text">
+                                <label>
+                                    <input class="radio with-gap deep-orange-text" id="heightRadio" name="group"
+                                        type="radio" />
+                                    <span></span>
+                                </label>
+                            </span>
+                            Ramp Height
                         </span>
-                        Ramp Height
-                    </span>
-                    <div class="row inputs">
-                        <div class="input-field col s6 feet">
-                            <input id="ramp_height_feet" placeholder="" type="number" />
-                            <label id="ramp_height_feet_label" for="ramp_height_feet">Feet</label>
-                            <label for="disabled"></label>
-                        </div>
-                        <div class="input-field col s6 inches">
-                            <input id="ramp_height_inches" placeholder="" type="number" />
-                            <label id="ramp_height_incheslabel" for="ramp_height_inches">Inches</label>
-                            <label for="disabled"></label>
+                        <div class="row inputs">
+                            <div class="input-field col s6 feet">
+                                <input id="ramp_height_feet" placeholder="" type="number" />
+                                <label id="ramp_height_feet_label" for="ramp_height_feet">Feet</label>
+                                <label for="disabled"></label>
+                            </div>
+                            <div class="input-field col s6 inches">
+                                <input id="ramp_height_inches" placeholder="" type="number" />
+                                <label id="ramp_height_incheslabel" for="ramp_height_inches">Inches</label>
+                                <label for="disabled"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">
-                        <span class="radio">
-                            <label>
-                                <input class="radio with-gap" id="lengthRadio" name="group" type="radio" />
-                                <span></span>
-                            </label>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            <span class="radio">
+                                <label>
+                                    <input class="radio with-gap" id="lengthRadio" name="group" type="radio" />
+                                    <span></span>
+                                </label>
+                            </span>
+                            Ramp Length
                         </span>
-                        Ramp Length
-                    </span>
-                    <div class="row inputs">
-                        <div class="input-field col s6 feet">
-                            <input id="ramp_length_feet" placeholder="" type="number" />
-                            <label id="ramp_length_feet_label" for="ramp_length_feet">Feet</label>
-                            <label for="disabled"></label>
-                        </div>
-                        <div class="input-field col s6 inches">
-                            <input id="ramp_length_inches" placeholder="" type="number" />
-                            <label id="ramp_length_inches_label" for="ramp_length_inches">Inches</label>
-                            <label for="disabled"></label>
+                        <div class="row inputs">
+                            <div class="input-field col s6 feet">
+                                <input id="ramp_length_feet" placeholder="" type="number" />
+                                <label id="ramp_length_feet_label" for="ramp_length_feet">Feet</label>
+                                <label for="disabled"></label>
+                            </div>
+                            <div class="input-field col s6 inches">
+                                <input id="ramp_length_inches" placeholder="" type="number" />
+                                <label id="ramp_length_inches_label" for="ramp_length_inches">Inches</label>
+                                <label for="disabled"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">
-                        <span class="radio">
-                            <label>
-                                <input checked class="radio with-gap" id="ratioRadio" name="group" type="radio"
-                                    checked />
-                                <span></span>
-                            </label>
+            <div class="col s12 l4">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            <span class="radio">
+                                <label>
+                                    <input checked class="radio with-gap" id="ratioRadio" name="group" type="radio"
+                                        checked />
+                                    <span></span>
+                                </label>
+                            </span>
+                            Ratio
                         </span>
-                        Ratio
-                    </span>
-                    <div class="row inputs">
-                        <div class="input-field col s12">
-                            <input disabled placeholder="" id="ratio" type="number" />
-                            <label for="disabled"></label>
+                        <div class="row inputs">
+                            <div class="input-field col s12">
+                                <input disabled placeholder="" id="ratio" type="number" />
+                                <label for="disabled"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+
         <div class="row center">
             <div class="switch">
                 <label>
@@ -118,10 +142,11 @@
                 </label>
             </div>
         </div>
+
     </div>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    
+
 </body>
 
 </html>

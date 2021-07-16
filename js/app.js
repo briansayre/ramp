@@ -2,18 +2,19 @@ $(document).ready(function () {
 
     var selected = 3;
     var metric = $("#units").prop("checked");
-
+    
     $("#ramp_height_feet, #ramp_height_inches, #units").on("input", calc);
     $("#ramp_length_feet, #ramp_length_inches, #ratio").on("input", calc);
     $(".radio").click(toggleValue);
     $("#units").click(toggleUnit);
-
     enableAll();
     $("#ratio").attr("disabled", "");
     $("#ratio").attr("checked", "");
 
     function calc() {
+        
         toggleUnit();
+
         var heightFeet = parseFloat($("#ramp_height_feet").val());
         if (isNaN(heightFeet)) heightFeet = 0;
 
@@ -35,6 +36,8 @@ $(document).ready(function () {
             calcImperial(heightFeet, heightInches, lengthFeet, lengthInches, ratio);
         }
     }
+    
+    calc();
 
     function calcMetric(heightFeet, lengthFeet, ratio) {
 
@@ -92,14 +95,6 @@ $(document).ready(function () {
         calc();
     }
 
-    function enableAll() {
-        $("#ramp_length_feet").removeAttr("disabled");
-        $("#ramp_length_inches").removeAttr("disabled");
-        $("#ramp_height_feet").removeAttr("disabled");
-        $("#ramp_height_inches").removeAttr("disabled");
-        $("#ratio").removeAttr("disabled");
-    }
-
     function toggleUnit() {
         metric = $("#units").prop("checked");
         if (metric) {
@@ -115,5 +110,12 @@ $(document).ready(function () {
         }
     }
 
-    calc();
+    function enableAll() {
+        $("#ramp_length_feet").removeAttr("disabled");
+        $("#ramp_length_inches").removeAttr("disabled");
+        $("#ramp_height_feet").removeAttr("disabled");
+        $("#ramp_height_inches").removeAttr("disabled");
+        $("#ratio").removeAttr("disabled");
+    }
+
 });
